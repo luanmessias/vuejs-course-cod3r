@@ -12,6 +12,7 @@
 <body>
     <div id="app">
         <p>{{ title }}</p>
+        <p>{{ saudacao() }}</p>
     </div>
 
     <script>
@@ -20,6 +21,11 @@
             data: {
                 title: 'Using VueJs!'
             },
+            methods: {
+                saudacao: function() {
+                    return 'Boa semana!'
+                }
+            }
         })
     </script>
 </body>

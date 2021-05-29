@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Course</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{ contador }}</p>
+        <button v-on:click="somar(5, $event)">Somar 1</button>
+        <p v-on:mousemove="updateXY">
+            <span v-on:mousemove="parar">PARAR AQUI 1 - </span>
+            Mouse: {{ x }} e {{ y }}
+            <span v-on:mousemove.stop.prevent> - PARAR AQUI 2</span>
+        </p>
+        <a v-on:click="naoNavegar" href="http://google.com">Google</a>
+        <p>
+            <input type="text" v-on:keyup.enter="exibirAlerta">
+        </p>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                contador: 0,
+                x: 0,
+                y: 0
+            },
+            methods: {
+                somar(valor, event) {
+                    console.log(valor, event)
+                    this.contador += valor
+                },
+                updateXY() {
+                    this.x = event.clientX
+                    this.y = event.clientY
+                },
+                parar(event) {
+                    event.stopPropagation()
+                },
+                naoNavegar(event) {
+                    event.preventDefault()
+                },
+                exibirAlerta() {
+                    alert('Estou te alertando!')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

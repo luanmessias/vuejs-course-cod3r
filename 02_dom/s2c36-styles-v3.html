@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Course</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+  <style>
+    .caixas {
+      display: flex;
+      justify-content: space-around;
+    }
+    .demo {
+      transition: all .3s ease;
+      width: 100px;
+      height: 100px;
+      background-color: gray;
+    }
+
+    .c1 {
+      background-color: red;
+    }
+    .c2 {
+      background-color: green;
+    }
+    .c3 {
+      background-color: blue;
+    }
+    .girar {
+      transform: rotate(45deg);
+    }
+  </style>
+
+    <div id="app">
+      <div class="caixas">
+
+        <div
+          class="demo"
+          @click="applyC1 = !applyC1"
+          :class="style1"
+        ></div>
+
+        <div
+          class="demo"
+          @click="applyC2 = !applyC2"
+          :class="{c2: applyC2}"
+        ></div>
+
+        <div
+          class="demo"
+          :class="[classCSS, {girar: aplyGirar}]"
+        ></div>
+
+      </div>
+
+      <hr>
+
+
+      <select name="" id="" v-model="classCSS">
+        <option value="c1">Classe 1</option>
+        <option value="c2">Classe 2</option>
+        <option value="c3">Classe 3</option>
+      </select>
+
+      <select name="" id="" v-model="aplyGirar">
+        <option :value="true">Girar</option>
+        <option :value="false">Nao Girar</option>
+      </select>
+       
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                applyC1: false,
+                applyC2: false,
+                applyC3: false,
+                aplyGirar: false,
+                classCSS: 'c1'
+            },
+            computed: {
+              style1() {
+                return {
+                  c1: this.applyC1,
+                  c2: !this.applyC1
+                }
+              }
+            }
+        })
+    </script>
+</body>
+
+</html>

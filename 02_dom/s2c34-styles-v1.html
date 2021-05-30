@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Course</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+  <style>
+    #app {
+      display: flex;
+      justify-content: space-around;
+    }
+    .demo {
+      width: 100px;
+      height: 100px;
+      background-color: gray;
+    }
+
+    .c1 {
+      background-color: red;
+    }
+    .c2 {
+      background-color: green;
+    }
+    .c3 {
+      background-color: blue;
+    }
+  </style>
+
+    <div id="app">
+       <div
+          class="demo"
+          @click="applyC1 = !applyC1"
+          :class="{c1: applyC1}"
+        ></div>
+
+       <div
+          class="demo"
+          @click="applyC2 = !applyC2"
+          :class="{c2: applyC2}"
+        ></div>
+
+       <div
+          class="demo"
+          @click="applyC3 = !applyC3"
+          :class="{c3: applyC3}"
+        ></div>
+       
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                applyC1: false,
+                applyC2: false,
+                applyC3: false,
+            },
+        })
+    </script>
+</body>
+
+</html>

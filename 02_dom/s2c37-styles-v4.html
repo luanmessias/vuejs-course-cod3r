@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Course</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+  <style>
+    .caixas {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .demo {
+      transition: all .3s ease;
+      width: 100px;
+      height: 100px;
+      background-color: gray;
+    }
+
+    .c1 {
+      background-color: red;
+    }
+    .c2 {
+      background-color: green;
+    }
+    .c3 {
+      background-color: blue;
+    }
+    .girar {
+      transform: rotate(45deg);
+    }
+  </style>
+
+    <div id="app">
+      <div class="caixas">
+
+        <div class="demo" :style="{backgroundColor: color}"></div>
+
+        <div class="demo" :style="[myStyles]"></div>
+
+        <div class="demo"></div>
+
+      </div>
+
+      <hr>
+
+
+      <input type="text" v-model='color'>
+      <input type="text" v-model='customSize'>
+       
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+              color: 'gray',
+              customSize: 100
+            },
+            computed: {
+              myStyles() {
+                return {
+                  backgroundColor: this.color,
+                  width: `${this.customSize}px`,
+                  height: `${this.customSize}px`
+                }
+              }
+            }
+        })
+    </script>
+</body>
+
+</html>

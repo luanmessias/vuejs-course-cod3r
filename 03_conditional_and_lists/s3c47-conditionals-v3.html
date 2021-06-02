@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Course</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <template v-if="logado">
+            <p>User logged: {{ nome }}</p>
+            <p>Perfil: Admin</p>
+        </template>
+        <p v-else-if="anonimo">Navegando como anonimo</p>
+        <p v-else>No user logged</p>
+        <button @click="{logado = !logado}">{{ logado ? 'Sair' : 'Entrar' }}</button>
+        <input type="checkbox" v-model="anonimo">
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+              nome: 'Luan',
+              logado: false,
+              anonimo: true,
+            },
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Course</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <span v-for="n in 10">
+            {{ n }}
+        </span>
+        <hr>
+        <ul>
+            <li v-for="person in people">
+                <p v-for="(value, key, index) in person">
+                    {{ index + 1 }}) {{ key }}: {{ value }} <br>
+                </p>
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li
+                v-for="(color, i) in colors"
+                :style="{backgroundColor: color}">
+                {{ i + 1 }} - {{ color }}
+            </li>
+        </ul>
+        <hr>
+        <template v-for="(color, i) in colors">
+            <h1>{{ color }}</h1>
+            <p>{{ i }}</p>
+        </template>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                colors: ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
+                        '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
+                        '#80B300', '#809900', '#E6B3B3', '#6680B3'],
+
+                people: [
+                    {name: 'Ana', age: 26, weight: 59},
+                    {name: 'Bob', age: 31, weight: 80},
+                    {name: 'Tony', age: 40, weight: 75},
+                ]
+            },
+        })
+    </script>
+
+
+    <style>
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            padding: 0px;
+            margin: 0px;
+            
+        }
+        li {
+            padding: 10px;
+            margin: 10px;
+            box-sizing: border-box;
+        }
+
+        h1, p {
+            display: inline;
+        }
+    </style>
+</body>
+
+</html>

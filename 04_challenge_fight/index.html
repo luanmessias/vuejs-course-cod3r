@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Challenge - Fight</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./styles.css" />
+</head>
+<body>
+
+  <div id="fight">
+    <div class="life">
+
+      <div class="character">
+        <div class="charName">Player</div>
+        <div class="hpContainer">
+          <span class="hpPercent">{{ `${playerLife}%` }}</span>
+          <div 
+            :class="['hp', {warning: playerLife < 70}, {danger: playerLife < 50}]"
+            :style="{width: playerLife + '%'}">
+          </div>
+        </div>
+      </div>
+      
+      <div class="character">
+        <div class="charName">Monster</div>
+        <div class="hpContainer">
+          <span class="hpPercent">{{ `${monsterLife}%` }}</span>
+          <div 
+          :class="['hp', {warning: monsterLife < 70}, {danger: monsterLife < 50}]"
+          :style="{width: monsterLife + '%'}">
+        </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="result">
+      <h2 v-show="whoGotKilled === 'player'" class="result lose">You Lose!</h2>
+      <h2 v-show="whoGotKilled === 'monster'" class="result win">You Win!</h2>
+      <h2 v-show="whoGotKilled === 'draw'">Draw</h2>
+    </div>
+
+    <div class="actions">
+      <template v-if="!whoGotKilled">
+        <div @click="runAttack" class="act attack">
+          ⚔ Attack
+        </div>
+  
+        <div @click="runSpecialAttack" :class="['act', 'ultimate', {disabled: useSpecialPower}]">
+          🧙‍♂️ Special
+        </div>
+  
+        <div @click="runPlayerCure"  :class="['act', 'cure', {disabled: usedCure}, {disabled: playerLife === 100}]">
+          🧡 Curar
+        </div>
+
+        <div @click="restartGame" class="act restart">
+          🎲 Play Again
+        </div>
+  
+      </template>
+      <template v-else>
+        <div @click="restartGame" class="act restart">
+          Play Again
+        </div>
+      </template>
+    </div>
+
+    
+    <div class="fightLog">
+      <template v-for="log in fightLog.slice().reverse()">
+        <div :key="log.index" :class="['log', log.class]">{{ log.msg }}</div>
+      </template>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

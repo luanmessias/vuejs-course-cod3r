@@ -13,6 +13,9 @@
 </template>
 
 <script>
+import EventBus from '@/EventBus'
+
+
 export default {
     props: {
         idade: Number,
@@ -25,8 +28,8 @@ export default {
     },
     methods: {
         alterarIdade() {
-            //this.idade = 33
-            this.$emit('idadeMudou', 33)
+            this.idade += 1
+            EventBus.alterarIdade(this.idade)
         }
     }
 }

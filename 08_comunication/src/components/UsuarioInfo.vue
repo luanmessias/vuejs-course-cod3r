@@ -10,6 +10,9 @@
 </template>
 
 <script>
+import EventBus from '@/EventBus'
+
+
 export default {
     props: {
         nome: {
@@ -31,6 +34,11 @@ export default {
             // this.nome = 'Pedro'
             this.$emit('nomeMudou', 'Pedro')
         }
+    },
+    created() {
+        EventBus.quandoIdadeMudar(idade =>  {
+            this.idade = idade
+        })
     }
 }
 </script>

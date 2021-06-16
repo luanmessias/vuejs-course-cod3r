@@ -1,15 +1,18 @@
 <template>
 	<div id="app">
+		<app-challenge />
+
 		<app-usuario />
 	</div>
 </template>
 
 <script>
 import AppUsuario from "./components/Usuario.vue";
+import AppChallenge from '@/components/challenge/User/Component.vue'
 
 export default {
 	name: "app",
-	components: { AppUsuario }
+	components: { AppUsuario, AppChallenge }
 }
 </script>
 

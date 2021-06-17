@@ -1,12 +1,20 @@
 <template>
     <div class="citacao">
-        
+        <slot name="fonte"/>
+        <slot name="texto"/>
+        <slot name="autor"/>
+
+        <slot />
     </div>
 </template>
 
 <script>
 export default {
-
+    props: {
+        citacao: {
+            type: Object
+        }
+    }
 }
 </script>
 

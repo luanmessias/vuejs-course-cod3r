@@ -14,7 +14,19 @@ export default {
         citacao: {
             type: Object
         }
-    }
+    },
+    created() {
+        console.log('created')
+    },
+    destroyed() {
+        console.log('destroyed')
+    },
+    activated() {
+        console.log('activated')
+    },
+    deactivated() {
+        console.log('deactivated')
+    },
 }
 </script>
 

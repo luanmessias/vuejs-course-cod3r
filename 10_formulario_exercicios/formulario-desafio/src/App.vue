@@ -4,11 +4,40 @@
 		<div class="conteudo">
 			<form class="painel">
 				<div class="cabecalho">Formulário</div>
-				<!-- Exercicio 01 -->
-				<!-- Criar uma formulário de registro -->
-				<!-- Nome completo (Nome e Sobrenome) -->
-				<!-- Email -->
-				<!-- Senha -->
+
+					<form class="painel" v-if="!enviado">
+						<Rotulo nome="Nome Completo">
+							<input type="text" v-model.lazy.trim="fullName">
+						</Rotulo>
+
+						<Rotulo nome="E-Mail">
+							<input type="email" v-model.lazy.trim="email">
+						</Rotulo>
+
+						<Rotulo nome="Senha">
+							<input type="password" v-model.lazy.trim="password">
+						</Rotulo>
+
+						<Rotulo nome="Qual produto?">
+							<span class="mr-4">
+								<input 
+									type="radio" 
+									value="web" 
+									v-model="produto"> Web</span>
+							<span class="mr-4">
+								<input 
+									type="radio" 
+									value="mobile"
+									v-model="produto"> Mobile</span>
+							<span>
+								<input 
+									type="radio" 
+									value="outro" 
+									v-model="produto"> Outro</span>
+						</Rotulo>
+					</form>
+
+
 				<!-- Armazenar Dados? (Sim/Não) -->
 
 				<!-- Exercicio 02 -->
@@ -21,76 +50,92 @@
 			</form>
 			<div class="painel">
 				<div class="cabecalho">Resultado</div>
+					<Rotulo nome="Nome Completo">
+						{{ fullName }}
+					</Rotulo>
 
+					<Rotulo nome="E-Mail">
+						{{ email }}
+					</Rotulo>
+
+						<Rotulo nome="Senha">
+							<span>{{ password }}</span>
+						</Rotulo>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-import Rotulo from './components/Rotulo.vue'
+import Rotulo from "./components/Rotulo.vue";
 
 export default {
-	name: 'app',
-	components: { Rotulo }
-}
+  name: "app",
+  components: { Rotulo },
+	data() {
+		return {
+			fullName: '',
+			email: '',
+			password: ''
+		}
+	}
+};
 </script>
 
 <style>
-
 body {
-	background-color: #ECECEC;
+  background-color: #ececec;
 }
 
 #app {
-	font-family: 'Avenir', Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2c3e50;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .conteudo {
-	display: flex;
+  display: flex;
 }
 
 .painel {
-	flex: 1;
-	background: #FFF;
-	margin: 0px 10px;
-	padding: 20px;
-	border: 1px solid #AAA;
-	border-radius: 5px;
+  flex: 1;
+  background: #fff;
+  margin: 0px 10px;
+  padding: 20px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
 }
 
 .painel .cabecalho {
-	width: 100%;
-	background-color: #DDD;
-	padding: 10px 0px;
-	border-radius: 5px;
-	font-size: 1.4rem;
+  width: 100%;
+  background-color: #ddd;
+  padding: 10px 0px;
+  border-radius: 5px;
+  font-size: 1.4rem;
 }
 
 #app form button {
-	float: right;
-	margin: 10px 0px;
-	padding: 10px 20px;
-	font-size: 1.4rem;
-	border-radius: 5px;
-	color: #FFF;
-	background-color: #2196F3;
+  float: right;
+  margin: 10px 0px;
+  padding: 10px 20px;
+  font-size: 1.4rem;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #2196f3;
 }
 
 #app h1 {
-	font-weight: 200;
-	margin: 20px;
-	padding: 0;
+  font-weight: 200;
+  margin: 20px;
+  padding: 0;
 }
 
 .mr-4 {
-	margin-right: 40px;
+  margin-right: 40px;
 }
 </style>

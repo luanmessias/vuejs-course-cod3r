@@ -2,12 +2,16 @@
 	<div id="app">
 		<h1>Formulário Desafio</h1>
 		<div class="conteudo">
-			<form class="painel">
+			<form class="painel" v-if="!showResult">
 				<div class="cabecalho">Formulário</div>
 
-					<form class="painel" v-if="!enviado">
-						<Rotulo nome="Nome Completo">
-							<input type="text" v-model.lazy.trim="fullName">
+					<form class="painel">
+						<Rotulo nome="Nome">
+							<input type="text" v-model.lazy.trim="name">
+						</Rotulo>
+						
+						<Rotulo nome="Sobrenome">
+							<input type="text" v-model.lazy.trim="surname">
 						</Rotulo>
 
 						<Rotulo nome="E-Mail">
@@ -20,66 +24,88 @@
 
 						<Rotulo nome="Qual produto?">
 							<span class="mr-4">
-								<input 
+								<input
+									name="product"
 									type="radio" 
 									value="web" 
-									v-model="produto"> Web</span>
+									v-model="product"> Web</span>
 							<span class="mr-4">
 								<input 
+									name="product"
 									type="radio" 
 									value="mobile"
-									v-model="produto"> Mobile</span>
+									v-model="product"> Mobile</span>
 							<span>
 								<input 
+									name="product"
 									type="radio" 
 									value="outro" 
-									v-model="produto"> Outro</span>
+									v-model="product"> Outro</span>
 						</Rotulo>
+
+						<Rotulo nome="Armazenar os dados?">
+							<span class="mr-4">
+								<input
+									name="storeData"
+									type="radio" 
+									value="true" 
+									v-model="storeData"> Sim</span>
+							<span class="mr-4">
+								<input 
+									name="storeData"
+									type="radio" 
+									value="false"
+									v-model="storeData"> Nao</span>
+						</Rotulo>
+
+						<button @click.prevent="showResult = true">Enviar</button>
 					</form>
 
-
-				<!-- Armazenar Dados? (Sim/Não) -->
-
-				<!-- Exercicio 02 -->
-				<!-- Só mostrar o fomulário de não tiver sido submetido -->
-				<!-- Mostrar a área de Resultado apenas quando o formulário for submetido -->
-				
-				<!-- Exercicio 03 -->
-				<!-- Crie um componente personalizado NomeCompleto -->
-				<!-- Esse componente deve receber Nome e Sobrenome -->
 			</form>
-			<div class="painel">
+			<div class="painel" v-if="showResult">
 				<div class="cabecalho">Resultado</div>
 					<Rotulo nome="Nome Completo">
-						{{ fullName }}
+						{{ name }}	{{ surname }}
 					</Rotulo>
 
 					<Rotulo nome="E-Mail">
 						{{ email }}
 					</Rotulo>
 
-						<Rotulo nome="Senha">
-							<span>{{ password }}</span>
-						</Rotulo>
+					<Rotulo nome="Senha">
+						<span>{{ password }}</span>
+					</Rotulo>
+
+					<Rotulo nome="Qual Produto">
+						<span>{{ product }}</span>
+					</Rotulo>
+
+					<Rotulo nome="Armazenar dados?">
+						<span>{{ storeData }}</span>
+					</Rotulo>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-import Rotulo from "./components/Rotulo.vue";
+import Rotulo from './components/Rotulo.vue'
 
 export default {
-  name: "app",
+  name: 'app',
   components: { Rotulo },
-	data() {
-		return {
-			fullName: '',
-			email: '',
-			password: ''
-		}
-	}
-};
+  data() {
+    return {
+      name: '',
+      surname: '',
+      email: '',
+      password: '',
+      product: '',
+      storeData: false,
+      showResult: false,
+    }
+  },
+}
 </script>
 
 <style>
@@ -88,7 +114,7 @@ body {
 }
 
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

@@ -1,15 +1,13 @@
 <template>
   <div id="app" class="container-fluid">
     <h1>Animações</h1>
-    
+
     <fieldset class="scheduler-border">
       <legend class="scheduler-border">With CSS</legend>
 
-      <b-button
-        variant="primary"
-        class="mb-4"
-        @click="exibir = !exibir"
-      > Mostrar Menagem </b-button>
+      <b-button variant="primary" class="mb-4" @click="exibir = !exibir">
+        Mostrar Menagem
+      </b-button>
 
       <transition name="fade">
         <b-alert variant="info" show v-if="exibir">{{ msg }}</b-alert>
@@ -32,7 +30,9 @@
       </b-select>
 
       <transition :name="tipoAnimacao" mode="out-in">
-        <b-alert variant="info" show v-if="exibir" key="info">{{ msg }}</b-alert>
+        <b-alert variant="info" show v-if="exibir" key="info">{{
+          msg
+        }}</b-alert>
         <b-alert variant="warning" show v-else key="warning">{{ msg }}</b-alert>
       </transition>
     </fieldset>
@@ -40,11 +40,9 @@
     <fieldset class="scheduler-border">
       <legend class="scheduler-border">With JS</legend>
 
-      <b-button
-        variant="primary"
-        class="mb-4"
-        @click="exibirJs = !exibirJs"
-      > Alternar </b-button>
+      <b-button variant="primary" class="mb-4" @click="exibirJs = !exibirJs">
+        Alternar
+      </b-button>
 
       <transition
         :css="false"
@@ -52,7 +50,6 @@
         @enter="enter"
         @after-enter="afterEnter"
         @enter-cancelled="enterCancelled"
-        
         @before-leave="beforeLeave"
         @leave="leave"
         @after-leave="afterLeave"
@@ -60,134 +57,126 @@
       >
         <div v-if="exibirJs" class="caixa"></div>
       </transition>
-
     </fieldset>
 
-     <fieldset class="scheduler-border">
+    <fieldset class="scheduler-border">
       <legend class="scheduler-border">Animated component variation</legend>
 
       <div class="d-flex justify-content-center">
         <b-button
-          class="m-4" 
+          class="m-4"
           variant="primary"
-          @click="selectedComponent = 'AlertaInfo'">
-        Info</b-button>
+          @click="selectedComponent = 'AlertaInfo'"
+        >
+          Info</b-button
+        >
 
         <b-button
-          class="m-4" 
+          class="m-4"
           variant="warning"
-          @click="selectedComponent = 'AlertaAdvertencia'">
-        Alert</b-button>
+          @click="selectedComponent = 'AlertaAdvertencia'"
+        >
+          Alert</b-button
+        >
       </div>
-      
+
       <transition name="fade" mode="out-in">
         <component :is="selectedComponent"></component>
       </transition>
-
-     </fieldset>
-
+    </fieldset>
 
     <fieldset class="scheduler-border">
       <legend class="scheduler-border">Using transition-group</legend>
 
-      <b-button
-        class="m-4" 
-        variant="primary"
-        @click="adicionarAluno">
-      Adicionar Aluno</b-button>
+      <b-button class="m-4" variant="primary" @click="adicionarAluno">
+        Adicionar Aluno</b-button
+      >
 
       <transition-group name="slide" tag="div">
         <b-list-group v-for="(aluno, i) in alunos" :key="aluno">
-            <b-list-group-item @click="removerAluno(i)" >
-              {{ aluno }}
-            </b-list-group-item>
+          <b-list-group-item @click="removerAluno(i)">
+            {{ aluno }}
+          </b-list-group-item>
         </b-list-group>
       </transition-group>
-
-     </fieldset>
-
-
-
-    
+    </fieldset>
   </div>
 </template>
 
 <script>
-import AlertaAdvertencia from './AlertaAdvertencia.vue'
-import AlertaInfo from './AlertaInfo.vue'
+import AlertaAdvertencia from "./AlertaAdvertencia.vue";
+import AlertaInfo from "./AlertaInfo.vue";
 export default {
   components: {
     AlertaAdvertencia,
-    AlertaInfo
+    AlertaInfo,
   },
   data() {
     return {
-      alunos: ['Roberto', 'Julia', 'Teresa', 'Paulo'],
-      msg: 'Uma mensagem de informacoes para o usuario',
+      alunos: ["Roberto", "Julia", "Teresa", "Paulo"],
+      msg: "Uma mensagem de informacoes para o usuario",
       exibir: false,
       exibirJs: false,
-      tipoAnimacao: 'fade',
+      tipoAnimacao: "fade",
       larguraBase: 0,
-      selectedComponent: 'AlertaInfo'
-    }
+      selectedComponent: "AlertaInfo",
+    };
   },
   methods: {
     adicionarAluno() {
-      const randomName = Math.random()
-        .toString(36)
-        .substring(2)
-      this.alunos.push(randomName)
+      const randomName = Math.random().toString(36).substring(2);
+      this.alunos.push(randomName);
     },
     removerAluno(index) {
-      this.alunos.splice(index, 1)
+      this.alunos.splice(index, 1);
     },
     animate(el, done, negativo) {
-      let rodada = 1
+      let rodada = 1;
       const temporizador = setInterval(() => {
         const novaLargura =
-          this.larguraBase + (negativo ? -rodada * 10 : rodada * 10)
-        el.style.width = `${novaLargura}px`
-        rodada++
+          this.larguraBase + (negativo ? -rodada * 10 : rodada * 10);
+        el.style.width = `${novaLargura}px`;
+        rodada++;
         if (rodada > 30) {
-          clearInterval(temporizador)
-          done()
+          clearInterval(temporizador);
+          done();
         }
-      }, 20)
+      }, 20);
     },
     beforeEnter(el) {
-      this.larguraBase = 0
-      el.style.width = `${this.larguraBase}px`
+      this.larguraBase = 0;
+      el.style.width = `${this.larguraBase}px`;
     },
     enter(el, done) {
-      this.animate(el, done, false)
+      this.animate(el, done, false);
     },
     afterEnter(el) {
-      console.log('afterEnter')
+      console.log("afterEnter");
     },
     enterCancelled(el) {
-      console.log('enterCancelled')
+      console.log("enterCancelled");
     },
 
     beforeLeave(el) {
-      this.larguraBase = 300
-      el.style.width = `${this.larguraBase}px`
+      this.larguraBase = 300;
+      el.style.width = `${this.larguraBase}px`;
     },
     leave(el, done) {
-      this.animate(el, done, true)
+      this.animate(el, done, true);
     },
     afterLeave(el) {
-      console.log('afterLeave')
+      console.log("afterLeave");
     },
     leaveCancelled(el) {
-      console.log('leaveCancelled')
-    }
-  }
-}
+      console.log("leaveCancelled");
+    },
+  },
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

@@ -1,16 +1,20 @@
 <template>
-	<div id="app">
-		<h1>Rotas com VueRouter</h1>
-		<Menu />
-		<router-view />
-	</div>
+  <div id="app">
+    <h1>Rotas com VueRouter</h1>
+    <router-view name="menu" />
+    <transition
+      mode="out-in"
+      enter-active-class="animated rubberBand"
+      leave-active-class="animated rollOut"
+    >
+      <router-view />
+    </transition>
+    <router-view name="menuInferior" />
+  </div>
 </template>
 
 <script>
-import Menu from './components/template/Menu.vue'
-export default {
-  components: { Menu },
-}
+export default {};
 </script>
 
 <style>
